@@ -12,9 +12,12 @@ class KisiKayitVC: UIViewController {
     @IBOutlet weak var tfKisiAd: UITextField!
     @IBOutlet weak var tfKisiTel: UITextField!
     
+    var kisiKayitPresenterNesnesi: ViewToPresenterKisiKayitProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        KisiKayitRouter.createModule(ref: self)
         
         
         
@@ -22,12 +25,9 @@ class KisiKayitVC: UIViewController {
     
     @IBAction func buttonKaydet(_ sender: Any) {
         if let ka = tfKisiAd.text, let kt = tfKisiTel.text {
-            kayit(kisiAd: ka, kisiTel: kt)
+            kisiKayitPresenterNesnesi?.ekle(kisiAd: ka, kisiTel: kt)
         }
     }
     
     
-    func kayit(kisiAd:String, kisiTel:String) {
-        print("Kişi adı:\(kisiAd) - Kişi tel:\(kisiTel)")
-    }
 }

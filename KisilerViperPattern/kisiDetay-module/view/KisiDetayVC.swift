@@ -14,8 +14,12 @@ class KisiDetayVC: UIViewController {
     
     var kisi:Kisiler?
     
+    var kisiDetayPresenterNesnesi: ViewToPresenterKisiDetayProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        KisiDetayRouter.createModule(ref: self)
         
         if let k = kisi {
             tfKisiAd.text = k.kisiAd
@@ -28,11 +32,8 @@ class KisiDetayVC: UIViewController {
     
     @IBAction func buttonGuncelle(_ sender: Any) {
         if let ka = tfKisiAd.text, let kt = tfKisiTel.text, let k = kisi {
-            guncelle(kisiId: k.kisiId!, kisiAd: ka, kisiTel: kt)
+            kisiDetayPresenterNesnesi?.guncelle(kisiId: k.kisiId!, kisiAd: ka, kisiTel: kt)
         }
     }
     
-    func guncelle(kisiId:Int, kisiAd:String, kisiTel:String) {
-        print("Kişi ID:\(kisiId) - Kişi adı:\(kisiAd) - Kişi tel:\(kisiTel)")
-    }
 }

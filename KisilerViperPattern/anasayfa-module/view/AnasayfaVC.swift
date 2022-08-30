@@ -13,35 +13,42 @@ class AnasayfaVC: UIViewController {
     @IBOutlet weak var kisilerTableView: UITableView!
     
     var kisilerListe = [Kisiler]()
-    
+    var anasayfaPresenterNesnesi: ViewToPresenterAnasayfaProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AnasayfaRouter.createModule(ref: self)
+        
         searchBar.delegate = self
         kisilerTableView.delegate = self
         kisilerTableView.dataSource = self
-        
-        let k1 = Kisiler(kisiId: 1, kisiAd: "Burak AÇIK", kisiTel: "0 532 488 2405")
-        let k2 = Kisiler(kisiId: 2, kisiAd: "Seda AÇIK", kisiTel: "0 536 633 5472")
-        kisilerListe.append(k1)
-        kisilerListe.append(k2)
         
         
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        print("Anasayfaya dönüldü.")
+        anasayfaPresenterNesnesi?.kisileriYukle()
     }
 
 
 }
 
 
+extension AnasayfaVC: PresenterToViewAnasayfaProtocol {
+    func vieweVeriGonder(kisilerListesi: Array<Kisiler>) {
+        self.kisilerListe = kisilerListesi
+        DispatchQueue.main.async {
+            self.kisilerTableView.reloadData()
+        }
+    }
+}
+
+
 extension AnasayfaVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("Arama sonucu: \(searchText)")
+        anasayfaPresenterNesnesi?.ara(aramaKelimesi: searchText)
     }
 }
 
@@ -84,7 +91,7 @@ extension AnasayfaVC: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             let evetButton = UIAlertAction(title: "Evet", style: .destructive) {action in
-                print("\(kisi.kisiAd!) silindi.")
+                self.anasayfaPresenterNesnesi?.sil(kisiId: kisi.kisiId!)
             }
             alert.addAction(iptalButton)
             alert.addAction(evetButton)
