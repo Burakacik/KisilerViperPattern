@@ -27,6 +27,7 @@ class KisiKayitVC: UIViewController {
         if let ka = tfKisiAd.text, let kt = tfKisiTel.text {
             kisiKayitPresenterNesnesi?.ekle(kisiAd: ka, kisiTel: kt)
         }
+        navigationController?.popToRootViewController(animated: true)
     }
     
     
