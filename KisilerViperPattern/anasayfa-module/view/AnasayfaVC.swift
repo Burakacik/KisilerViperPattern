@@ -24,13 +24,14 @@ class AnasayfaVC: UIViewController {
         kisilerTableView.delegate = self
         kisilerTableView.dataSource = self
         
+        anasayfaPresenterNesnesi?.kisileriYukle()
         
     }
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        anasayfaPresenterNesnesi?.kisileriYukle()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        anasayfaPresenterNesnesi?.kisileriYukle()
+//    }
 
 
 }
@@ -48,7 +49,11 @@ extension AnasayfaVC: PresenterToViewAnasayfaProtocol {
 
 extension AnasayfaVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        anasayfaPresenterNesnesi?.ara(aramaKelimesi: searchText)
+        if searchText == "" {
+            anasayfaPresenterNesnesi?.kisileriYukle()
+        }else{
+            anasayfaPresenterNesnesi?.ara(aramaKelimesi: searchText)
+        }
     }
 }
 
@@ -96,10 +101,8 @@ extension AnasayfaVC: UITableViewDelegate, UITableViewDataSource {
             alert.addAction(iptalButton)
             alert.addAction(evetButton)
             self.present(alert, animated: true)
-            
         }
         return UISwipeActionsConfiguration(actions: [silAction])
     }
-    
     
 }

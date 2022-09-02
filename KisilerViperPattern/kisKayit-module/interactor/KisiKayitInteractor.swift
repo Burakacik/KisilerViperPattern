@@ -6,10 +6,16 @@
 //
 
 import Foundation
+import Firebase
 
 class KisiKayitInteractor: PresenterToInteractorKisiKayitProtocol {
+    
+    var refKisiler = Database.database().reference().child("kisiler")
+                                                           
     func kisiEkle(kisiAd: String, kisiTel: String) {
-        print("Kişi adı:\(kisiAd) - Kişi tel:\(kisiTel)")
+        
+        let yeniKisi = ["kisiId":"","kisiAd":kisiAd,"kisiTel":kisiTel]
+        refKisiler.childByAutoId().setValue(yeniKisi)
     }
     
     

@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import Firebase
 
 class KisiDetayInteractor: PresenterToInteractorKisiDetayProtocol {
-    func kisiGuncelle(kisiId: Int, kisiAd: String, kisiTel: String) {
-        print("Kişi ID:\(kisiId) - Kişi adı:\(kisiAd) - Kişi tel:\(kisiTel)")
+    
+    var refKisiler = Database.database().reference().child("kisiler")
+                                                           
+    func kisiGuncelle(kisiId: String, kisiAd: String, kisiTel: String) {
+        let guncellenenKisi = ["kisiAd":kisiAd,"kisiTel":kisiTel]
+        refKisiler.child(kisiId).updateChildValues(guncellenenKisi)
     }
     
     

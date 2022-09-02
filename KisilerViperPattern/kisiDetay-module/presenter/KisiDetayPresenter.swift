@@ -10,7 +10,7 @@ import Foundation
 class KisiDetayPresenter: ViewToPresenterKisiDetayProtocol {
     var kisiDetayInteractor: PresenterToInteractorKisiDetayProtocol?
     
-    func guncelle(kisiId: Int, kisiAd: String, kisiTel: String) {
+    func guncelle(kisiId: String, kisiAd: String, kisiTel: String) {
         kisiDetayInteractor?.kisiGuncelle(kisiId: kisiId, kisiAd: kisiAd, kisiTel: kisiTel)
     }
     

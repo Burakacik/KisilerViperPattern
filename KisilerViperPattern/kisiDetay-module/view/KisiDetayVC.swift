@@ -34,6 +34,7 @@ class KisiDetayVC: UIViewController {
         if let ka = tfKisiAd.text, let kt = tfKisiTel.text, let k = kisi {
             kisiDetayPresenterNesnesi?.guncelle(kisiId: k.kisiId!, kisiAd: ka, kisiTel: kt)
         }
+        navigationController?.popToRootViewController(animated: true)
     }
     
 }

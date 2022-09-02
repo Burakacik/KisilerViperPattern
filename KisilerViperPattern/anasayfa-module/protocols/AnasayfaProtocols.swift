@@ -13,7 +13,7 @@ protocol ViewToPresenterAnasayfaProtocol {
     
     func kisileriYukle()
     func ara(aramaKelimesi:String)
-    func sil(kisiId:Int)
+    func sil(kisiId:String)
 }
 
 protocol PresenterToInteractorAnasayfaProtocol {
@@ -21,7 +21,7 @@ protocol PresenterToInteractorAnasayfaProtocol {
     
     func tumKisileriAl()
     func kisiAra(aramaKelimesi:String)
-    func kisiSil(kisiId:Int)
+    func kisiSil(kisiId:String)
 }
 
 protocol InteractorToPresenterAnasayfaProtocol {

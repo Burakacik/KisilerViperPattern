@@ -6,26 +6,61 @@
 //
 
 import Foundation
+import Firebase
 
 class AnasayfaInteractor: PresenterToInteractorAnasayfaProtocol {
+    
     var anasayfaPresenter: InteractorToPresenterAnasayfaProtocol?
     
+    var refKisiler = Database.database().reference().child("kisiler")
+    
+    
     func tumKisileriAl() {
-        var liste = [Kisiler]()
-        
-        let k1 = Kisiler(kisiId: 1, kisiAd: "Burak AÇIK", kisiTel: "0 532 488 2405")
-        let k2 = Kisiler(kisiId: 2, kisiAd: "Seda AÇIK", kisiTel: "0 536 633 5472")
-        liste.append(k1)
-        liste.append(k2)
-        anasayfaPresenter?.presentaraVeriGonder(kisilerListesi: liste)
+        refKisiler.observe(.value, with: { snapshot in
+            var liste = [Kisiler]()
+            
+            if let gelenVeri = snapshot.value as? [String:AnyObject] {
+                for kisiKey in gelenVeri {
+                    if let d = kisiKey.value as? NSDictionary {
+                        let kisiId = kisiKey.key
+                        let kisiAd = d["kisiAd"] as? String ?? ""
+                        let kisiTel = d["kisiTel"] as? String ?? ""
+                        
+                        let kisi = Kisiler(kisiId: kisiId, kisiAd: kisiAd, kisiTel: kisiTel)
+                        liste.append(kisi)
+                    }
+                }
+            }
+            self.anasayfaPresenter?.presentaraVeriGonder(kisilerListesi: liste)
+        })
     }
+    
     
     func kisiAra(aramaKelimesi: String) {
-        print("Arama sonucu: \(aramaKelimesi)")
+        refKisiler.observe(.value, with: { snapshot in
+            var liste = [Kisiler]()
+            
+            if let gelenVeri = snapshot.value as? [String:AnyObject] {
+                for kisiKey in gelenVeri {
+                    if let d = kisiKey.value as? NSDictionary {
+                        let kisiId = kisiKey.key
+                        let kisiAd = d["kisiAd"] as? String ?? ""
+                        let kisiTel = d["kisiTel"] as? String ?? ""
+                        
+                        if kisiAd.lowercased().contains(aramaKelimesi.lowercased()) {
+                            let kisi = Kisiler(kisiId: kisiId, kisiAd: kisiAd, kisiTel: kisiTel)
+                            liste.append(kisi)
+                        }
+                    }
+                }
+            }
+            self.anasayfaPresenter?.presentaraVeriGonder(kisilerListesi: liste)
+        })
     }
     
-    func kisiSil(kisiId: Int) {
-        print("\(kisiId) silindi.")
+    
+    func kisiSil(kisiId: String) {
+        refKisiler.child(kisiId).removeValue()
     }
     
     

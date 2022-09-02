@@ -29,6 +29,8 @@
 		AD0B35D128BE241E00F6F390 /* KisiDetayRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0B35D028BE241E00F6F390 /* KisiDetayRouter.swift */; };
 		AD0B35D328BE242800F6F390 /* KisiDetayInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0B35D228BE242800F6F390 /* KisiDetayInteractor.swift */; };
 		AD0B35D528BE243200F6F390 /* KisiDetayPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0B35D428BE243200F6F390 /* KisiDetayPresenter.swift */; };
+		ADA1C2BE28C11DEE00D389AD /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = ADA1C2BD28C11DEE00D389AD /* FirebaseDatabase */; };
+		ADB7723628C1032800B23446 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ADB7723528C1032800B23446 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,7 @@
 		AD0B35D028BE241E00F6F390 /* KisiDetayRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KisiDetayRouter.swift; sourceTree = "<group>"; };
 		AD0B35D228BE242800F6F390 /* KisiDetayInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KisiDetayInteractor.swift; sourceTree = "<group>"; };
 		AD0B35D428BE243200F6F390 /* KisiDetayPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KisiDetayPresenter.swift; sourceTree = "<group>"; };
+		ADB7723528C1032800B23446 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA1C2BE28C11DEE00D389AD /* FirebaseDatabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +102,7 @@
 				AD0B359528BE0DDD00F6F390 /* Assets.xcassets */,
 				AD0B359728BE0DDD00F6F390 /* LaunchScreen.storyboard */,
 				AD0B359A28BE0DDD00F6F390 /* Info.plist */,
+				ADB7723528C1032800B23446 /* GoogleService-Info.plist */,
 			);
 			path = KisilerViperPattern;
 			sourceTree = "<group>";
@@ -291,6 +296,9 @@
 			dependencies = (
 			);
 			name = KisilerViperPattern;
+			packageProductDependencies = (
+				ADA1C2BD28C11DEE00D389AD /* FirebaseDatabase */,
+			);
 			productName = KisilerViperPattern;
 			productReference = AD0B358928BE0DDC00F6F390 /* KisilerViperPattern.app */;
 			productType = "com.apple.product-type.application";
@@ -319,6 +327,9 @@
 				Base,
 			);
 			mainGroup = AD0B358028BE0DDC00F6F390;
+			packageReferences = (
+				ADA1C2BC28C11DEE00D389AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = AD0B358A28BE0DDC00F6F390 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -334,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD0B359928BE0DDD00F6F390 /* LaunchScreen.storyboard in Resources */,
+				ADB7723628C1032800B23446 /* GoogleService-Info.plist in Resources */,
 				AD0B359628BE0DDD00F6F390 /* Assets.xcassets in Resources */,
 				AD0B359428BE0DDC00F6F390 /* Main.storyboard in Resources */,
 			);
@@ -584,6 +596,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ADA1C2BC28C11DEE00D389AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ADA1C2BD28C11DEE00D389AD /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADA1C2BC28C11DEE00D389AD /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AD0B358128BE0DDC00F6F390 /* Project object */;
 }
